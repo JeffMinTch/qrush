@@ -1,11 +1,16 @@
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/stack';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './src/views/HomeScreen';
 
+
+
 export default function App() {
   return (
-    <NavigationContainer>
+    // <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false, }}>
           <Stack.Screen
             name="Home"
@@ -37,9 +42,11 @@ export default function App() {
           <Stack.Screen name="Camera" component={CameraScreen} /> */}
 
         </Stack.Navigator>
-      </NavigationContainer>
+      // </NavigationContainer>
   );
 }
+
+const Stack = createNativeStackNavigator();
 
 const styles = StyleSheet.create({
   container: {

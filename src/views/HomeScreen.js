@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StatusBar, StyleSheet, Text, View } from 'react-native';
-import Logo from '../../assets/qrush_logo';
+import Logo from '../../assets/qrush_logo.svg';
 
 
 const HomeScreen = ({ navigation }) => {
