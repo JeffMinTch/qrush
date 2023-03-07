@@ -7,10 +7,8 @@ export default function Step2Screen({ navigation }) {
             {/* <Image source={require('../../assets/qrush_header.png')} resizeMode="contain" style={step2Styles.header} /> */}
             <Image source={require('../../assets/progress2.png')} resizeMode="contain" style={step2Styles.progressImage} />
             <ScrollView style={{width: '100%'}}>
-
                 <Text style={[step2Styles.headline, { fontFamily: "GothamRounded-Medium" }]}>Step Two</Text>
                 <Image source={require('../../assets/selfie.gif')} resizeMode="cover" style={step2Styles.image} />
-
                 <Text style={[step2Styles.text, { fontFamily: "GothamRounded-Medium", marginTop: 20 }]}>1. Take a picture of yourself.</Text>
                 <Text style={[step2Styles.text, { fontFamily: "GothamRounded-Medium" }]}>2. You have 30 minutes to do that, otherwise you must scan the qr code again.</Text>
             </ScrollView>

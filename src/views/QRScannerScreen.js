@@ -10,6 +10,9 @@ export default function QRScannerScreen({ navigation, route }) {
 
     const [hasPermission, setHasPermission] = React.useState(false);
     const [scanData, setScanData] = React.useState();
+    const [isScanned, setIsScanned] = React.useState(false);
+
+
     console.log("QR Scaner:" + hasPermission);
     useEffect(() => {
         (async () => {
@@ -31,12 +34,39 @@ export default function QRScannerScreen({ navigation, route }) {
     const handleBarCodeScanned = ({ type, data }) => {
 
         console.log("Handling STarted:" + hasPermission);
-        navigation.navigate('Step2', { name: 'Jane' })
+        if(!isScanned) {
+            registerUser(data);
+        }
+        // navigation.navigate('Step2', { name: 'Jane' })
 
         setScanData(data);
         console.log(`Data: ${data}`);
         console.log(`Type: ${type}`);
     };
+
+    const registerUser = async (eventLink) => {
+        try {
+         const response = await fetch(eventLink, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            }
+        });
+         const user = await response.json();
+         setIsScanned(true);
+         console.log(user);
+         navigation.navigate('Step2', { name: 'Jane' })
+
+        //  setData(json.movies);
+       } catch (error) {
+        console.log('INVALID QR CODE');
+         console.error(error);
+       } 
+    //    finally {
+    //      setLoading(false);
+    //    }
+     }
 
 
     return (

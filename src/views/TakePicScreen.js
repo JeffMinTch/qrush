@@ -1,14 +1,17 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, View, Text, Dimensions, Platform } from 'react-native';
+import {ActivityIndicator, StyleSheet, View, Text, Dimensions, Platform } from 'react-native';
 import { Camera, CameraType, FlashMode } from 'expo-camera';
 import { Image, ScrollView, Pressable, TouchableOpacity, SafeAreaView, Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function App() {
+
+export default function TakePicScreen({ navigation }) {
     //  camera permissions
     const [photo, setPhoto] = useState();
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const [type, setType] = useState(CameraType.back);
     const [flash, setFlash] = useState(FlashMode.off);
@@ -55,11 +58,11 @@ export default function App() {
 
         console.log('1');
         setPhoto(newPhoto);
-        console.log(photo);
+        // console.log(photo);
     };
 
     if (photo) {
-        console.log(photo);
+        // console.log(photo);
         // let sharePic = () => {
         //     shareAsync(photo.uri).then(() => {
         //         console.log('2');
@@ -74,42 +77,84 @@ export default function App() {
         //     });
         // };
         console.log('3');
-        return (
-
-            <SafeAreaView style={takePicStyles.cameraContainer}>
-                {/* <Image source={require('../../assets/qrush_header.png')} resizeMode="contain" style={takePicStyles.header} /> */}
-                <Image source={require('../../assets/progress3.png')} resizeMode="contain" style={takePicStyles.progressImage} />
-                {/* <ScrollView style={takePicStyles.previewContainer}> */}
+        if(isLoading) {
+            return(
+                <ActivityIndicator size="large" color="#FF677E" />
+            )
+        } else {
+            return (
+                
+                <SafeAreaView style={takePicStyles.cameraContainer}>
+                    {/* <Image source={require('../../assets/qrush_header.png')} resizeMode="contain" style={takePicStyles.header} /> */}
+                    <Image source={require('../../assets/progress3.png')} resizeMode="contain" style={takePicStyles.progressImage} />
+                    {/* <ScrollView style={takePicStyles.previewContainer}> */}
                     <Text style={[takePicStyles.headline, { fontFamily: "GothamRounded-Medium" }]}>Final Step</Text>
-
+    
                     <View style={takePicStyles.imageWrapper}>
                         <Image resizeMode='cover' style={takePicStyles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
-
+    
                     </View>
-                {/* </ScrollView> */}
-                {/* <Button title="Share" onPress={sharePic} />
-            {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto}  /> : undefined} */}
-                {/* <Button title="Discard" onPress={() => setPhoto(undefined)} />  */}
-                {/* <Pressable
-                    style={[takePicStyles.proceedButton]}
-                    title="Go to Jane's profile"
-                    onPress={() =>
-                        navigation.navigate('Scan QR code', { name: 'Jane' })
-                    }
-                >
-                    <Text style={[takePicStyles.firstButtonText, takePicStyles.text, { fontFamily: "GothamRounded-Medium" }]}>Join Party</Text>
-                </Pressable> */}
-                <TouchableOpacity
-                    style={[takePicStyles.proceedButton]}
-                    title="Go to Jane's profile"
-                    onPress={() =>
-                        navigation.navigate('Scan QR Code', { name: 'Jane' })
-                    }
-                >
-                    <Text style={[takePicStyles.firstButtonText, { fontFamily: "GothamRounded-Medium" }]}>Start Swiping</Text>
-                </TouchableOpacity>
-            </SafeAreaView>
-        );
+                    {/* </ScrollView> */}
+                    {/* <Button title="Share" onPress={sharePic} />
+                {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto}  /> : undefined} */}
+                    {/* <Button title="Discard" onPress={() => setPhoto(undefined)} />  */}
+                    {/* <Pressable
+                        style={[takePicStyles.proceedButton]}
+                        title="Go to Jane's profile"
+                        onPress={() =>
+                            navigation.navigate('Scan QR code', { name: 'Jane' })
+                        }
+                    >
+                        <Text style={[takePicStyles.firstButtonText, takePicStyles.text, { fontFamily: "GothamRounded-Medium" }]}>Join Party</Text>
+                    </Pressable> */}
+                    <TouchableOpacity
+                        style={[takePicStyles.proceedButton]}
+                        title="Go to Jane's profile"
+                        onPress={proceed}
+                    >
+                        <Text style={[takePicStyles.firstButtonText, { fontFamily: "GothamRounded-Medium" }]}>Start Swiping</Text>
+                    </TouchableOpacity>
+                </SafeAreaView>
+            );
+
+        }
+    } 
+    // else {
+    //     return(
+    //         <ActivityIndicator size="large" color="#FF677E" />
+    //     )
+    // }
+
+    function proceed() {
+        console.log('Start Swiping')
+        startSwiping();
+
+    }
+
+    
+
+    async function startSwiping() {
+        try {
+
+            const form = new FormData();
+            form.append('picture', {
+                uri: "data:image/jpg;base64," + photo.base64,
+                type: 'image/jpg',
+                name: 'image.jpg',
+            });
+            setIsLoading(true);
+            
+            const response = await fetch('http://192.168.178.129:8081/event/pictures/ac4270b0-8725-4281-bcb7-f842868f68ef', {
+                method: 'POST',
+                body: form
+            });
+            setIsLoading(false);
+            navigation.navigate('Match', { name: 'Jane' })
+        } catch(error) {
+            console.error(error);
+        }
+
+
     }
 
     function toggleCameraType() {

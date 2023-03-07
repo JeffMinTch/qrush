@@ -18,6 +18,7 @@ import {
   DefaultTheme,
   // NavigationContainer,
 } from '@react-navigation/native';
+import MatchScreen from './src/views/MatchScreen';
 
 
 SplashScreen.preventAutoHideAsync();
@@ -89,6 +90,7 @@ export default function App() {
             <Stack.Screen name="Camera" component={TakePicScreen} />
             <Stack.Screen name="Step1" component={Step1Screen} />
             <Stack.Screen name="Step2" component={Step2Screen} />
+            <Stack.Screen name="Match" component={MatchScreen} />
 
 
           </Stack.Navigator>
