@@ -11,6 +11,8 @@ export default function QRScannerScreen({ navigation, route }) {
     const [hasPermission, setHasPermission] = React.useState(false);
     const [scanData, setScanData] = React.useState();
     const [isScanned, setIsScanned] = React.useState(false);
+    const isQrCodeScanned = useRef(false);
+    
 
 
     console.log("QR Scaner:" + hasPermission);
@@ -34,8 +36,13 @@ export default function QRScannerScreen({ navigation, route }) {
     const handleBarCodeScanned = ({ type, data }) => {
 
         console.log("Handling STarted:" + hasPermission);
-        if(!isScanned) {
+        console.log("QR Code Scanned?: " + isQrCodeScanned);
+        if(!isQrCodeScanned.current) {
+        // if(!isScanned) {
+            isQrCodeScanned.current = true;
             registerUser(data);
+            setIsScanned(true);
+            console.log('Register');
         }
         // navigation.navigate('Step2', { name: 'Jane' })
 
@@ -45,6 +52,7 @@ export default function QRScannerScreen({ navigation, route }) {
     };
 
     const registerUser = async (eventLink) => {
+        console.log('EventLink: ' + eventLink)
         try {
          const response = await fetch(eventLink, {
             method: 'POST',
@@ -56,7 +64,7 @@ export default function QRScannerScreen({ navigation, route }) {
          const user = await response.json();
          setIsScanned(true);
          console.log(user);
-         navigation.navigate('Step2', { name: 'Jane' })
+         navigation.navigate('Step2', { user: user })
 
         //  setData(json.movies);
        } catch (error) {
@@ -68,19 +76,20 @@ export default function QRScannerScreen({ navigation, route }) {
     //    }
      }
 
-
+ 
     return (
 
-
+        
+    //   <ImageBackground source={require('../../assets/background1.png')} resizeMode="cover" style={{flex: 1}}>
         <View style={styles.container}>
+
         {/* <ImageBackground source={require('../../assets/background1.png')} resizeMode="cover" style={styles.image}> */}
             {/* <View> */}
             {/* </View> */}
             {/* <Image source={require('../../assets/qrush_header.png')} resizeMode="contain" style={styles.header} /> */}
-            <Image source={require('../../assets/progress1.png')} resizeMode="contain" style={styles.progressImage} />
+            {/* <Image source={require('../../assets/progress1.png')} resizeMode="contain" style={styles.progressImage} /> */}
 
-            <Text style={[styles.headline, { fontFamily: "GothamRounded-Medium" }]}>Step One</Text>
-            <Text style={[styles.description, { fontFamily: "GothamRounded-Medium", marginTop: 0 }]}>Scan the qrush qr-code on your event.</Text>
+            {/* <Text style={[styles.description, { fontFamily: "GothamRounded-Medium", marginTop: 0 }]}>Scan the qrush qr-code on your event.</Text> */}
                 {/* <Text style={styles.text1}>Scan QR Code at your event.</Text> */}
 
             <View style={[styles.wrapper]}>
@@ -92,8 +101,9 @@ export default function QRScannerScreen({ navigation, route }) {
                 <Camera
                     onBarCodeScanned={handleBarCodeScanned}
                     ratio='16:9'
-                    style={[StyleSheet.absoluteFillObject, {marginBottom: 30}]}
+                    style={[StyleSheet.absoluteFillObject, {}]}
                 />
+                <Text style={[styles.headline, { fontFamily: "GothamRounded-Bold" }]}>scan qr code</Text>
                 <View style={styles.content}>
                     <Image source={require('../../assets/sight.png')} style={styles.sight} />
                     <Pressable
@@ -103,16 +113,18 @@ export default function QRScannerScreen({ navigation, route }) {
                             navigation.navigate('Home', { name: 'Jane' })
                         }
                     >
-                        <Text style={[styles.firstButtonText, { fontFamily: "GothamRounded-Bold" }]}>Back</Text>
+                        <Text style={[styles.firstButtonText, { fontFamily: "GothamRounded-Light" }]}>or enter code</Text>
                     </Pressable>
 
                 </View>
             </View>
-            {scanData && <Button title='Scan Again?' onPress={() => setScanData(undefined)} />}
+            {scanData && <Button title='Scan Again?' color="white" onPress={() => setScanData(undefined)} />}
             <StatusBar style="auto" />
 
         {/* </ImageBackground> */}
+
         </View>
+        // </ImageBackground>
     );
 
 };
@@ -122,7 +134,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        padding: 20
+        backgroundColor: '#000'
+        // padding: 20
 
         // margin: 16
     },
@@ -159,13 +172,13 @@ const styles = StyleSheet.create({
         // backgroundColor: 'green',
         justifyContent: 'flex-start',
         alignItems: "center",
-        width: '95%',
+        width: '100%',
         borderRadius: 8,
         // marginBottom: 30,
         // paddingTop: 10
         // height: '95%',
         alignSelf: 'center',
-        marginBottom: 30
+        // marginBottom: 30
     },
     barcodeScanner: {
         alignSelf: 'center',
@@ -198,22 +211,22 @@ const styles = StyleSheet.create({
 
     firstButton: {
         marginTop: 50,
-        backgroundColor: '#fff',
-        borderColor: '#FF677E',
-        color: '#FF677E',
+        backgroundColor: '#000',
+        borderColor: '#000',
+        // color: '#fff',
         elevation: 1
     },
     firstButtonText: {
-        color: '#FF677E',
+        color: '#fff',
         fontSize: 20,
         fontWeight: '600',
     },
     headline: {
-        fontSize: 50,
-        color: '#FF677E',
-        // marginBottom: 30,
-        marginTop: 0,
-        alignSelf: 'flex-start',
+        fontSize: 40,
+        color: '#000',
+        marginBottom: 30,
+        marginTop: 100,
+        alignSelf: 'center',
         marginLeft: 10
     },
     progressImage: {
@@ -225,7 +238,7 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 22,
-        color: '#686868',
+        color: '#000',
         padding: 10,
         textAlign: 'left',
         // lineHeight: 30

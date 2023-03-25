@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import { ActivityIndicator, StyleSheet, View, Text, Dimensions, Platform } from 'react-native';
+import {ActivityIndicator, StyleSheet, View, Text, Dimensions, Platform } from 'react-native';
 import { Camera, CameraType, FlashMode } from 'expo-camera';
-import { Image, ScrollView, ImageBackground, Pressable, TouchableOpacity, SafeAreaView, Button } from 'react-native';
+import { Image, ScrollView, ImageBackground ,Pressable, TouchableOpacity, SafeAreaView, Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { manipulateAsync, FlipType, SaveFormat } from 'expo-image-manipulator';
@@ -57,14 +57,14 @@ export default function TakePicScreen({ navigation, route }) {
         // let newPhoto = await cameraRef.current.takePictureAsync(options);
         let newPhoto = await camera.takePictureAsync(options);
 
-        // console.log('1');
+        console.log('1');
         const manipResult = await manipulateAsync(
             newPhoto.localUri || newPhoto.uri,
             [{ flip: FlipType.Horizontal }],
-            { compress: 0.1, base64: true, format: SaveFormat.JPEG }
+            { compress: 0.1, format: SaveFormat.JPEG }
             // 
-        );
-        //   console.log('Manip Uri: ' + manipResult.base64);
+          );
+          console.log('Manip Uri: ' + manipResult.base64);
         setPhoto(manipResult);
     };
 
@@ -83,40 +83,38 @@ export default function TakePicScreen({ navigation, route }) {
         //         console.log('3')
         //     });
         // };
-        // console.log('3');
-        if (isLoading) {
-            return (
+        console.log('3');
+        if(isLoading) {
+            return(
                 <ActivityIndicator size="large" color="#FF677E" />
             )
         } else {
             return (
-                <View style={{flex: 1, backgroundColor: '#000'}}>
+                
+      <ImageBackground source={{ uri: photo.localUri || photo.uri }} resizeMode="cover" style={{flex: 1}}>
+                <View style={takePicStyles.cameraContainer}>
 
-
-                    <ImageBackground source={{ uri: photo.localUri || photo.uri }} resizeMode="cover" style={{ flex: 1 }}>
-                        <View style={takePicStyles.cameraContainer}>
-
-                            {/* <Image source={require('../../assets/qrush_header.png')} resizeMode="contain" style={takePicStyles.header} /> */}
-                            {/* <Image source={require('../../assets/progress3.png')} resizeMode="contain" style={takePicStyles.progressImage} /> */}
-                            {/* <ScrollView style={takePicStyles.previewContainer}> */}
-                            {/* <Text style={[takePicStyles.headline, { fontFamily: "GothamRounded-Medium" }]}>Final Step</Text> */}
-
-                            {/* <View style={takePicStyles.imageWrapper}>
+                    {/* <Image source={require('../../assets/qrush_header.png')} resizeMode="contain" style={takePicStyles.header} /> */}
+                    {/* <Image source={require('../../assets/progress3.png')} resizeMode="contain" style={takePicStyles.progressImage} /> */}
+                    {/* <ScrollView style={takePicStyles.previewContainer}> */}
+                    {/* <Text style={[takePicStyles.headline, { fontFamily: "GothamRounded-Medium" }]}>Final Step</Text> */}
+    
+                    {/* <View style={takePicStyles.imageWrapper}>
                         <Image resizeMode='cover' style={takePicStyles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
                     </View> */}
-                            <TouchableOpacity
-                                style={[takePicStyles.proceedButton]}
-                                title="Go to Jane's profile"
-                                onPress={proceed}
-                            >
-                                <Text style={[takePicStyles.firstButtonText, { fontFamily: "GothamRounded-Light" }]}>start swiping</Text>
-                            </TouchableOpacity>
+                        <TouchableOpacity
+                        style={[takePicStyles.proceedButton]}
+                        title="Go to Jane's profile"
+                        onPress={proceed}
+                        >
+                        <Text style={[takePicStyles.firstButtonText, { fontFamily: "GothamRounded-Medium" }]}>Start Swiping</Text>
+                    </TouchableOpacity>
 
-                            {/* </ScrollView> */}
-                            {/* <Button title="Share" onPress={sharePic} />
+                    {/* </ScrollView> */}
+                    {/* <Button title="Share" onPress={sharePic} />
                 {hasMediaLibraryPermission ? <Button title="Save" onPress={savePhoto}  /> : undefined} */}
-                            {/* <Button title="Discard" onPress={() => setPhoto(undefined)} />  */}
-                            {/* <Pressable
+                    {/* <Button title="Discard" onPress={() => setPhoto(undefined)} />  */}
+                    {/* <Pressable
                         style={[takePicStyles.proceedButton]}
                         title="Go to Jane's profile"
                         onPress={() =>
@@ -129,16 +127,15 @@ export default function TakePicScreen({ navigation, route }) {
 
 
 
-
-                        </View>
-                    </ImageBackground>
+                  
                 </View>
+    </ImageBackground>
             );
 
         }
-    }
+    } 
     // else {
-    //     return(
+        //     return(
     //         <ActivityIndicator size="large" color="#FF677E" />
     //     )
     // }
@@ -149,7 +146,7 @@ export default function TakePicScreen({ navigation, route }) {
 
     }
 
-
+    
 
     async function startSwiping() {
         try {
@@ -173,9 +170,9 @@ export default function TakePicScreen({ navigation, route }) {
                 body: form
             });
             setIsLoading(false);
-            navigation.navigate('Match', { user: route.params.user })
-        } catch (error) {
-            console.error(error);
+            navigation.navigate('Reels', { user: route.params.user })
+        } catch(error) {
+            // console.error(error);
         }
 
 
@@ -277,10 +274,10 @@ export default function TakePicScreen({ navigation, route }) {
                         <Image source={require('../../assets/bl-edge.png')} style={takePicStyles.blEdge} />
                         <Image source={require('../../assets/br-edge.png')} style={takePicStyles.brEdge} /> */}
                         <View style={{ flex: 1, flexDirection: 'column', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Text style={takePicStyles.text1}>TAKE A SELFIE</Text>
+                            <Text style={takePicStyles.text1}>take a picture of yourself</Text>
                             <View style={takePicStyles.subLayer}>
                                 <TouchableOpacity style={takePicStyles.button} onPress={toggleCameraType}>
-                                    <Ionicons name="ios-camera-reverse-sharp" size={42} color="black" />
+                                    <Ionicons name="ios-camera-reverse-sharp" size={32} color="white" />
                                 </TouchableOpacity>
                                 <Pressable style={takePicStyles.cameraButtonContainer} onPress={takePic}>
 
@@ -288,7 +285,7 @@ export default function TakePicScreen({ navigation, route }) {
 
                                 </Pressable>
                                 <TouchableOpacity style={takePicStyles.button} onPress={toggleFlashMode}>
-                                    <Ionicons name={flash === FlashMode.off ? 'md-flash-off' : 'md-flash'} size={42} color="black" />
+                                    <Ionicons name={flash === FlashMode.off ? 'md-flash-off' : 'md-flash'} size={32} color="white" />
                                 </TouchableOpacity>
 
                             </View>
@@ -317,7 +314,6 @@ const takePicStyles = StyleSheet.create({
         backgroundColor: '#000',
         justifyContent: 'center',
         margin: 0,
-        backgroundColor: '#000'
 
     },
     cameraPreview: {
@@ -339,8 +335,7 @@ const takePicStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        paddingHorizontal: 20,
-        marginBottom: 60
+        paddingHorizontal: 20
     },
     tlEdge: {
         position: 'absolute',
@@ -371,21 +366,21 @@ const takePicStyles = StyleSheet.create({
         height: 80
     },
     text1: {
-        color: 'black',
-        fontSize: 30,
-        marginTop: 50,
+        color: 'white',
+        fontSize: 22,
+        marginTop: 30,
         fontFamily: 'GothamRounded-Bold'
     },
     cameraButtonContainer: {
-        backgroundColor: '#000',
+        backgroundColor: '#FF677E',
         // alignSelf: 'flex-start',
-        width: 120,
-        height: 120,
-        borderRadius: 120 / 2,
+        width: 100,
+        height: 100,
+        borderRadius: 100 / 2,
         // marginTop: 'auto',
         // marginBottom: 20,
         borderWidth: 5,
-        borderColor: '#000',
+        borderColor: '#FF677E',
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10,
@@ -398,7 +393,7 @@ const takePicStyles = StyleSheet.create({
         justifyContent: 'flex-end'
         // width: '100%',
         // height: '100%',
-
+        
         // alignItems: 'center',
         // justifyContent: 'center',
         // backgroundColor: 'green'
@@ -436,15 +431,15 @@ const takePicStyles = StyleSheet.create({
     proceedButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 300,
-        paddingVertical: 15,
-        paddingHorizontal: 20,
+        width: 250,
+        paddingVertical: 12,
+        paddingHorizontal: 32,
         // margin: 16,
         marginTop: 'auto',
-        marginBottom: 100,
-        borderRadius: 8,
+        marginBottom: 50,
+        borderRadius: 32,
         marginTop: 10,
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
         borderColor: '#FF677E',
         color: '#FF677E',
         elevation: 3
@@ -454,8 +449,8 @@ const takePicStyles = StyleSheet.create({
     },
 
     firstButtonText: {
-        color: '#fff',
-        fontSize: 30
+        color: '#FF677E',
+        fontSize: 24
     },
     header: {
         width: 200,

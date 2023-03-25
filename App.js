@@ -19,6 +19,9 @@ import {
   // NavigationContainer,
 } from '@react-navigation/native';
 import MatchScreen from './src/views/MatchScreen';
+import UserList from './src/views/UserList';
+import FlatListScreen from './src/views/FlatListScreen';
+import Try from './src/views/Try';
 
 
 SplashScreen.preventAutoHideAsync();
@@ -27,7 +30,7 @@ const navTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: 'white',
+    background: 'black',
   },
 };
 
@@ -55,9 +58,9 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <ImageBackground source={require('./assets/background2.png')} resizeMode="cover" style={{flex: 1}}>
+    <View style={{ flex: 1}} onLayout={onLayoutRootView}>
       
+      {/* <ImageBackground source={require('./assets/background-green.png')} resizeMode="cover" style={{flex: 1}}> */}
         <NavigationContainer theme={navTheme}>
           <Stack.Navigator screenOptions={{ headerShown: false, }}>
             <Stack.Screen
@@ -91,13 +94,22 @@ export default function App() {
             <Stack.Screen name="Step1" component={Step1Screen} />
             <Stack.Screen name="Step2" component={Step2Screen} />
             <Stack.Screen name="Match" component={MatchScreen} />
+            <Stack.Screen name="UserList" component={UserList} />
+            <Stack.Screen name="FlatListScreen" component={FlatListScreen} />
+            <Stack.Screen name="MagneticSnapScroll" component={FlatListScreen} />
+            <Stack.Screen name="Try" component={Try} />
+
+
+
+
+
 
 
           </Stack.Navigator>
         </NavigationContainer>
+      {/* </ImageBackground> */}
 
 
-      </ImageBackground>
     </View>
   );
 }
