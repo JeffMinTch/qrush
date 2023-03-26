@@ -34,12 +34,16 @@ const DUMMY_DATA = [
   }
 ];
 
+
+
 export default function MatchScreen({ navigation, route }) {
 
   // matchCards();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
+
+  
 
   useEffect(() => {
 
@@ -100,6 +104,7 @@ export default function MatchScreen({ navigation, route }) {
           animateCardOpacity
           verticalSwipe={false}
           onSwipedRight={openModal}
+          // onSwipedLeft={onSwipeLeft}
           overlayLabels={{
             left: {
               element: <Text style={{ fontSize: 60, fontWeight: 'bold', color: '#f66773' }}>NOPE</Text>, /* Optional */
