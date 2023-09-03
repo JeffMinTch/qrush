@@ -3,6 +3,10 @@ import { StyleSheet, Text, View, Image, ImageBackground, Dimensions, TouchableOp
 import Swiper from 'react-native-deck-swiper';
 import React, { useEffect, useState, useRef } from 'react';
 import ModalComponent from './ModalComponent';
+import Constants from 'expo-constants';
+import { Ionicons } from '@expo/vector-icons'; 
+
+
 
 const { height, width } = Dimensions.get('window');
 
@@ -38,6 +42,8 @@ const DUMMY_DATA = [
 
 export default function MatchScreen({ navigation, route }) {
 
+  const apiBaseUrl = Constants.manifest.extra.API_BASE_URL;
+
   // matchCards();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +56,7 @@ export default function MatchScreen({ navigation, route }) {
     // try {
     const datafetch = async () => {
       console.log('Match' + route.params.user.uuid)
-      const response = await fetch('http://192.168.178.154:8080/event/match-cards/' + route.params.user.uuid, {
+      const response = await fetch(apiBaseUrl + '/event/match-cards/' + route.params.user.uuid, {
         method: 'GET',
       })
       const data = await response.json();
@@ -69,6 +75,19 @@ export default function MatchScreen({ navigation, route }) {
 
   }, []);
 
+  // const reload = async () => {
+  //   console.log('Match' + route.params.user.uuid)
+  //   const response = await fetch(apiBaseUrl + '/event/match-cards/' + route.params.user.uuid, {
+  //     method: 'GET',
+  //   })
+  //   const data = await response.json();
+  //   setData(data);
+
+  //   console.log(data);
+  //   setIsLoading(false);
+  //   // }
+  // }
+
   if (isLoading) return
   'loading';
 
@@ -79,6 +98,18 @@ export default function MatchScreen({ navigation, route }) {
   const closeModal = () => {
     setModalVisible(false);
   }
+
+
+  // if (!data || data.length === 0) {
+  //   return (
+  //     <View style={{ flex: 1, backgroundColor: '#000', justifyContent: 'center', alignItems: 'center' }}>
+  //       <TouchableOpacity onPress={reload}>
+  //       <Ionicons name="reload" size={24} color="black" />        </TouchableOpacity>
+  //       <Text style={{ color: '#fff', fontSize: 20 }}>no one joined yet</Text>
+  //     </View>
+  //   );
+  // }
+
 
   return (
     // <ImageBackground source={require('../../assets/background.png')} resizeMode="cover" style={{ width: width, height: height }}>
@@ -151,7 +182,7 @@ export default function MatchScreen({ navigation, route }) {
               <View key={card.uuid} style={[{ backgroundColor: 'white', height: '80%', width: '100%', borderRadius: 8 }, styles.cardShadow]}>
 
                 {/* <Text>{card.firstName}</Text> */}
-                <Image source={{ uri: 'http://192.168.178.154:8080/event/image/' + card.uuid }} resizeMode="cover" style={styles.cardImage} />
+                <Image source={{ uri: apiBaseUrl + '/event/image/' + card.uuid }} resizeMode="cover" style={styles.cardImage} />
               </View>
 
 

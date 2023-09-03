@@ -17,10 +17,8 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    // "jsEngine": "hermes",
     "ios": {
-      "supportsTablet": true,
-      // "jsEngine": "jsc"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
@@ -31,6 +29,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      // "API_BASE_URL": "https://qrush.azurewebsites.net"
+      "API_BASE_URL": "http://192.168.0.172:8080"
     }
   }
 }

@@ -6,10 +6,13 @@ import { Image, ScrollView, ImageBackground, Pressable, TouchableOpacity, SafeAr
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { manipulateAsync, FlipType, SaveFormat } from 'expo-image-manipulator';
+import Constants from 'expo-constants';
 
 
 export default function TakePicScreen({ navigation, route }) {
     //  camera permissions
+    const apiBaseUrl = Constants.manifest.extra.API_BASE_URL;
+
     const [photo, setPhoto] = useState();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -168,7 +171,7 @@ export default function TakePicScreen({ navigation, route }) {
             // console.log("NAvigation User:" + navigation.user);
             // console.log("User ID:" + navigation.user.uuid);
 
-            const response = await fetch('http://192.168.178.154:8080/event/pictures/' + route.params.user.uuid, {
+            const response = await fetch(apiBaseUrl+ '/event/pictures/' + route.params.user.uuid, {
                 method: 'POST',
                 body: form
             });

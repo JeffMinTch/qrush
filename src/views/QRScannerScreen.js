@@ -3,10 +3,15 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { StatusBar } from 'expo-status-bar';
 import { Camera } from 'expo-camera';
+import Constants from 'expo-constants';
+
 
 
 
 export default function QRScannerScreen({ navigation, route }) {
+
+    const apiBaseUrl = Constants.manifest.extra.API_BASE_URL;
+
 
     const [hasPermission, setHasPermission] = React.useState(false);
     const [scanData, setScanData] = React.useState();
@@ -40,7 +45,11 @@ export default function QRScannerScreen({ navigation, route }) {
         if(!isQrCodeScanned.current) {
         // if(!isScanned) {
             isQrCodeScanned.current = true;
-            registerUser(data);
+            const eventLink = apiBaseUrl + data;
+            // const eventLink = data;
+
+            console.log("EventLink: " + eventLink); 
+            registerUser(eventLink);
             setIsScanned(true);
             console.log('Register');
         }
@@ -66,14 +75,10 @@ export default function QRScannerScreen({ navigation, route }) {
          console.log(user);
          navigation.navigate('Step2', { user: user })
 
-        //  setData(json.movies);
        } catch (error) {
         console.log('INVALID QR CODE');
          console.error(error);
        } 
-    //    finally {
-    //      setLoading(false);
-    //    }
      }
 
  
