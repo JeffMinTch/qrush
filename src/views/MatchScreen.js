@@ -11,32 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 const { height, width } = Dimensions.get('window');
 
 
-const DUMMY_DATA = [
-  {
-    id: 123,
-    firstName: "Elon",
-    lastName: "Musk",
-    photoUrl: "https://images.pexels.com/photos/1205033/pexels-photo-1205033.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 234,
-    firstName: "Mark",
-    lastName: "Zuckerberg",
-    photoUrl: 'https://media.istockphoto.com/id/1329031407/de/foto/junger-mann-mit-rucksack-macht-selfie-portr%C3%A4t-auf-einem-berg-l%C3%A4chelnder-gl%C3%BCcklicher-kerl-der.jpg?b=1&s=612x612&w=0&k=20&c=IneX1zWKPiWTgx_U9R-92PAYLWZqQrMLdWd4mxlNNe0=',
-  },
-  {
-    id: 435,
-    firstName: "Elon",
-    lastName: "Musk",
-    photoUrl: "https://images.pexels.com/photos/1310522/pexels-photo-1310522.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-  {
-    id: 985,
-    firstName: "Mark",
-    lastName: "Zuckerberg",
-    photoUrl: 'https://images.pexels.com/photos/1085517/pexels-photo-1085517.jpeg?auto=compress&cs=tinysrgb&w=800',
-  }
-];
+
 
 
 
