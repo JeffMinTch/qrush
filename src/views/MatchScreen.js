@@ -4,7 +4,7 @@ import Swiper from 'react-native-deck-swiper';
 import React, { useEffect, useState, useRef } from 'react';
 import ModalComponent from './ModalComponent';
 import Constants from 'expo-constants';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
 
 
 export default function MatchScreen({ navigation, route }) {
@@ -15,7 +15,7 @@ export default function MatchScreen({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
 
-  
+
 
   useEffect(() => {
 
@@ -31,7 +31,7 @@ export default function MatchScreen({ navigation, route }) {
       console.log(data);
       setIsLoading(false);
     }
-   
+
 
     datafetch();
 
@@ -55,13 +55,13 @@ export default function MatchScreen({ navigation, route }) {
       <Text style={{ color: '#fff', fontSize: 24, marginTop: 60, alignSelf: 'center', fontFamily: 'GothamRounded-Light' }}>now find your</Text>
       <Text style={{ color: '#fff', fontSize: 80, marginTop: 10, alignSelf: 'center', fontFamily: 'GothamRounded-Medium' }}>qrush</Text>
       <View>
-      {/* <TouchableOpacity onPress={openModal}>
+        {/* <TouchableOpacity onPress={openModal}>
         <Text>Open Modal</Text>
       </TouchableOpacity> */}
-      <ModalComponent visible={modalVisible} onClose={closeModal} />
-    </View>
-        {/* <Image source={require('../../assets/logo_red.png')} style={styles.logo} /> */}
-      
+        <ModalComponent visible={modalVisible} onClose={closeModal} />
+      </View>
+      {/* <Image source={require('../../assets/logo_red.png')} style={styles.logo} /> */}
+
       {/* <Image source={require('./assets/qrush_header.png')} resizeMode="contain" style={styles.header} /> */}
       <View style={styles.container}>
         {/* <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}> */}
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 180,
     marginTop: 180,
-},
+  },
   cardImage: {
     width: '100%',
     height: '100%',

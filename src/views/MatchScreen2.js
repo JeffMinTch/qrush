@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, Image, StyleSheet } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import Constants from 'expo-constants';
+import ModalComponent from './ModalComponent';
+
 
 export default function MatchScreen2({ navigation, route }) {
   const apiBaseUrl = Constants.expoConfig.extra.API_BASE_URL;
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const [reloadFlag, setReloadFlag] = useState(false); // State für den Reload-Status
+  const [reloadFlag, setReloadFlag] = useState(true); // State für den Reload-Status
 
   const fetchData = async () => {
     try {
@@ -46,40 +48,49 @@ export default function MatchScreen2({ navigation, route }) {
   };
 
   return (
-    <View style={styles.container}>
-      {isLoading ? (
-        <Text style={styles.loadingText}>Loading...</Text>
-      ) : data && data.length > 0 ? (
-        <Swiper
-          containerStyle={styles.swiperContainer}
-          cards={data}
-          stackSize={5}
-          cardIndex={0}
-          animateCardOpacity
-          verticalSwipe={false}
-          onSwipedRight={openModal}
-          overlayLabels={{
-            left: {
-              element: <Text style={styles.overlayLabel}>NOPE</Text>,
-              title: 'NOPE',
-            },
-            right: {
-              element: <Text style={styles.overlayLabel}>LIKE</Text>,
-              title: 'LIKE',
-            },
-          }}
-          renderCard={(card) => (
-            <View key={card.uuid} style={styles.card}>
-              <Image source={{ uri: apiBaseUrl + '/event/image/' + card.uuid }} resizeMode="cover" style={styles.cardImage} />
-            </View>
-          )}
-        />
-      ) : (
-        <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>No cards available</Text>
-          <Button title="Reload" onPress={handleReload} />
-        </View>
-      )}
+    <View style={{ flex: 1, backgroundColor: '#000' }}>
+      <Text style={{ color: '#fff', fontSize: 24, marginTop: 60, alignSelf: 'center', fontFamily: 'GothamRounded-Light' }}>now find your</Text>
+      <Text style={{ color: '#fff', fontSize: 80, marginTop: 10, alignSelf: 'center', fontFamily: 'GothamRounded-Medium' }}>qrush</Text>
+      <View>
+        <ModalComponent visible={modalVisible} onClose={closeModal} />
+      </View>
+      <View style={styles.container}>
+        {isLoading ? (
+          <Text style={styles.loadingText}>Loading...</Text>
+        ) : data && data.length > 0 ? (
+          <View style={[styles.container, {}]}>
+            <Swiper
+              containerStyle={styles.swiperContainer}
+              cards={data}
+              stackSize={5}
+              cardIndex={0}
+              animateCardOpacity
+              verticalSwipe={false}
+              onSwipedRight={openModal}
+              overlayLabels={{
+                left: {
+                  element: <Text style={styles.overlayLabel}>NOPE</Text>,
+                  title: 'NOPE',
+                },
+                right: {
+                  element: <Text style={styles.overlayLabel}>LIKE</Text>,
+                  title: 'LIKE',
+                },
+              }}
+              renderCard={(card) => (
+                <View key={card.uuid} style={styles.card}>
+                  <Image source={{ uri: apiBaseUrl + '/event/image/' + card.uuid }} resizeMode="cover" style={styles.cardImage} />
+                </View>
+              )}
+            />
+          </View>
+        ) : (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>No cards available</Text>
+            <Button title="Reload" onPress={handleReload} />
+          </View>
+        )}
+      </View>
       {/* ModalComponent und andere UI-Elemente */}
     </View>
   );
@@ -88,7 +99,10 @@ export default function MatchScreen2({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    width: '100%',
+    // backgroundColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   loadingText: {
     color: '#fff',
