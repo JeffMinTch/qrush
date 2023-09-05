@@ -67,14 +67,46 @@ export default function MatchScreen2({ navigation, route }) {
               animateCardOpacity
               verticalSwipe={false}
               onSwipedRight={openModal}
+              // onSwipedLeft={onSwipeLeft}
               overlayLabels={{
                 left: {
-                  element: <Text style={styles.overlayLabel}>NOPE</Text>,
+                  element: <Text style={{ fontSize: 60, fontWeight: 'bold', color: '#f66773' }}>NOPE</Text>, /* Optional */
                   title: 'NOPE',
+                  style: {
+                    label: {
+                      textAlign: 'right',
+                      backgroundColor: 'red',
+                      borderColor: 'red',
+                      color: 'red',
+                      borderWidth: 1
+                    },
+                    wrapper: {
+                      flexDirection: 'column',
+                      alignItems: 'flex-end',
+                      justifyContent: 'flex-start',
+                      marginTop: 30,
+                      marginLeft: -30
+                    }
+                  }
                 },
                 right: {
-                  element: <Text style={styles.overlayLabel}>LIKE</Text>,
+                  element: <Text style={{ fontSize: 60, fontWeight: 'bold', color: '#7EF667' }}>LIKE</Text>,
                   title: 'LIKE',
+                  style: {
+                    label: {
+                      // backgroundColor: 'green',
+                      // borderColor: 'black',
+                      color: 'green',
+                      borderWidth: 1
+                    },
+                    wrapper: {
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      justifyContent: 'flex-start',
+                      marginTop: 30,
+                      marginLeft: 30
+                    }
+                  }
                 },
               }}
               renderCard={(card) => (
