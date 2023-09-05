@@ -94,7 +94,7 @@ export default function App() {
             <Stack.Screen name="Camera" component={TakePicScreen} />
             <Stack.Screen name="Step1" component={Step1Screen} />
             <Stack.Screen name="Step2" component={Step2Screen} />
-            <Stack.Screen name="Match" component={MatchScreen2} />
+            <Stack.Screen name="Match" component={MatchScreen} />
             <Stack.Screen name="UserList" component={UserList} />
             <Stack.Screen name="FlatListScreen" component={FlatListScreen} />
             <Stack.Screen name="MagneticSnapScroll" component={FlatListScreen} />

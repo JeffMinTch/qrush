@@ -4,7 +4,7 @@ import Swiper from 'react-native-deck-swiper';
 import Constants from 'expo-constants';
 
 export default function MatchScreen2({ navigation, route }) {
-  const apiBaseUrl = Constants.manifest.extra.API_BASE_URL;
+  const apiBaseUrl = Constants.expoConfig.extra.API_BASE_URL;
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);

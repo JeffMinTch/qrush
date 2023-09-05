@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function MatchScreen({ navigation, route }) {
 
-  const apiBaseUrl = Constants.manifest.extra.API_BASE_URL;
+  const apiBaseUrl = Constants.expoConfig.extra.API_BASE_URL;
 
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);

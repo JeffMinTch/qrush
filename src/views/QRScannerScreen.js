@@ -10,7 +10,7 @@ import Constants from 'expo-constants';
 
 export default function QRScannerScreen({ navigation, route }) {
 
-    const apiBaseUrl = Constants.manifest.extra.API_BASE_URL;
+    const apiBaseUrl = Constants.expoConfig.extra.API_BASE_URL;
 
 
     const [hasPermission, setHasPermission] = React.useState(false);

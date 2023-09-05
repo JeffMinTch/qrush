@@ -11,7 +11,7 @@ import Constants from 'expo-constants';
 
 export default function TakePicScreen({ navigation, route }) {
     //  camera permissions
-    const apiBaseUrl = Constants.manifest.extra.API_BASE_URL;
+    const apiBaseUrl = Constants.expoConfig.extra.API_BASE_URL;
 
     const [photo, setPhoto] = useState();
     const [isLoading, setIsLoading] = useState(false);
