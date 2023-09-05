@@ -22,6 +22,7 @@ import MatchScreen from './src/views/MatchScreen';
 import UserList from './src/views/UserList';
 import FlatListScreen from './src/views/FlatListScreen';
 import Try from './src/views/Try';
+import MatchScreen2 from './src/views/MatchScreen2';
 
 
 SplashScreen.preventAutoHideAsync();
@@ -93,7 +94,7 @@ export default function App() {
             <Stack.Screen name="Camera" component={TakePicScreen} />
             <Stack.Screen name="Step1" component={Step1Screen} />
             <Stack.Screen name="Step2" component={Step2Screen} />
-            <Stack.Screen name="Match" component={MatchScreen} />
+            <Stack.Screen name="Match" component={MatchScreen2} />
             <Stack.Screen name="UserList" component={UserList} />
             <Stack.Screen name="FlatListScreen" component={FlatListScreen} />
             <Stack.Screen name="MagneticSnapScroll" component={FlatListScreen} />
