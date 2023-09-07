@@ -1,9 +1,13 @@
 import React from 'react';
 import { View, Modal, TouchableOpacity, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import Constants from 'expo-constants';
 
 const { width, height } = Dimensions.get('window');
 
-const ModalComponent = ({ visible, onClose }) => {
+const ModalComponent = ({ visible, onClose, receiverName, senderName }) => {
+
+  const apiBaseUrl = Constants.expoConfig.extra.API_BASE_URL;
+
   return (
     <Modal visible={visible} animationType="fade" transparent={true}>
       <TouchableOpacity style={styles.background} onPress={onClose}>
@@ -16,8 +20,11 @@ const ModalComponent = ({ visible, onClose }) => {
               <Text style={styles.titleText}>Someone has a qrush on you</Text>
             </View>
             <View style={styles.images}>
-              <Image source={require('../../assets/mintchi.jpg')} style={styles.image} />
-              <Image source={require('../../assets/mintchi2.jpg')} style={styles.image} />
+            <Image source={{ uri: apiBaseUrl + '/event/image/' + receiverName }} resizeMode="cover" style={styles.image} />
+            <Image source={{ uri: apiBaseUrl + '/event/image/' + senderName }} resizeMode="cover" style={styles.image} />
+
+              {/* <Image source={require('../../assets/mintchi.jpg')} style={styles.image} />
+              <Image source={require('../../assets/mintchi2.jpg')} style={styles.image} /> */}
             </View>
             <View style={styles.buttons}>
               <TouchableOpacity style={styles.button} onPress={() => console.log("Let's meet")}>

@@ -14,6 +14,9 @@ export default function MatchScreen2({ navigation, route }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [reloadFlag, setReloadFlag] = useState(true); // State für den Reload-Status
   const [privateChats, setPrivateChats] = useState(new Map());
+  const [receiverName, setReceiverName] = useState(null);
+  const [senderName, setSenderName] = useState(null);
+
 
   const [userData, setUserData] = useState({
     username: route.params.user.uuid,
@@ -106,7 +109,9 @@ export default function MatchScreen2({ navigation, route }) {
     setReloadFlag(true); // Setze den Reload-Status auf true, um den Effekt auszulösen
   };
 
-  const openModal = () => {
+  const openModal = (receiverName, senderName) => {
+    setReceiverName(receiverName); // Assuming you have state for receiverName in your component
+    setSenderName(senderName); 
     setModalVisible(true);
   };
 
@@ -118,7 +123,10 @@ export default function MatchScreen2({ navigation, route }) {
     // console.log(payload);
     var payloadData = JSON.parse(payload.body);
     console.log('Open Modal');
-    openModal();
+    console.log('Receiver Name' + payloadData.receiverName);
+    console.log('Receiver Name' + payloadData.senderName);
+
+    openModal(payloadData.receiverName, payloadData.senderName);
     if (privateChats.get(payloadData.senderName)) {
       privateChats.get(payloadData.senderName).push(payloadData);
       setPrivateChats(new Map(privateChats));
@@ -154,7 +162,7 @@ export default function MatchScreen2({ navigation, route }) {
   }
 
   const onSwipeLeft = (cardIndex) => {
-    openModal()
+    // openModal()
   }
 
 
@@ -174,7 +182,7 @@ export default function MatchScreen2({ navigation, route }) {
       <Text style={{ color: '#fff', fontSize: 24, marginTop: 60, alignSelf: 'center', fontFamily: 'GothamRounded-Light' }}>now find your</Text>
       <Text style={{ color: '#fff', fontSize: 80, marginTop: 10, alignSelf: 'center', fontFamily: 'GothamRounded-Medium' }}>qrush</Text>
       <View>
-        <ModalComponent visible={modalVisible} onClose={closeModal} />
+        <ModalComponent visible={modalVisible} onClose={closeModal} receiverName={receiverName} senderName={senderName}/>
       </View>
       <View style={styles.container}>
         {isLoading ? (

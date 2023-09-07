@@ -58,7 +58,7 @@ export default function MatchScreen({ navigation, route }) {
         {/* <TouchableOpacity onPress={openModal}>
         <Text>Open Modal</Text>
       </TouchableOpacity> */}
-        <ModalComponent visible={modalVisible} onClose={closeModal} />
+        <ModalComponent visible={modalVisible} onClose={closeModal}/>
       </View>
       {/* <Image source={require('../../assets/logo_red.png')} style={styles.logo} /> */}
 
