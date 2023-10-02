@@ -5,7 +5,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Swiper from 'react-native-deck-swiper';
-import MatchScreen from './MatchScreen';
+import MatchScreen from './MatchScreen2';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,7 +47,7 @@ export default function TabScreen({ navigation, route }) {
             // options={{ title: 'Swipe' }}
           />
           {/* MatchScreen({user :route.params.user}) */}
-          <Tab.Screen
+          {/* <Tab.Screen
             name="Matches"
             component={() => <DummyScreen title="Matches" />}
             options={{ title: 'Matches' }}
@@ -56,7 +56,7 @@ export default function TabScreen({ navigation, route }) {
             name="Settings"
             component={() => <DummyScreen title="Settings" />}
             options={{ title: 'Settings' }}
-          />
+          /> */}
         </Tab.Navigator>
         <StatusBar style="auto" />
       {/* </NavigationContainer> */}

@@ -8,6 +8,7 @@ import Stomp from 'stompjs'; // hinzugefügt
 
 var stompClient = null;
 export default function MatchScreen2({ navigation, route }) {
+  
   const apiBaseUrl = Constants.expoConfig.extra.API_BASE_URL;
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
