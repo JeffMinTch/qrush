@@ -73,7 +73,7 @@ export default function QRScannerScreen({ navigation, route }) {
          const user = await response.json();
          setIsScanned(true);
          console.log(user);
-         navigation.navigate('Step2', { user: user })
+         navigation.navigate('ImagePickerScreen', { user: user })
 
        } catch (error) {
         console.log('INVALID QR CODE');

@@ -23,7 +23,8 @@ import UserList from './src/views/UserList';
 import FlatListScreen from './src/views/FlatListScreen';
 import Try from './src/views/Try';
 import MatchScreen2 from './src/views/MatchScreen2';
-import TabScreen from './src/views/TabScreen';
+import TabScreen from './src/views/TabScreen2';
+import ImagePickerScreen from './src/views/ImagePickerScreen';
 
 
 SplashScreen.preventAutoHideAsync();
@@ -95,6 +96,7 @@ export default function App() {
             <Stack.Screen name="Camera" component={TakePicScreen} />
             <Stack.Screen name="Step1" component={Step1Screen} />
             <Stack.Screen name="Step2" component={Step2Screen} />
+            <Stack.Screen name="ImagePickerScreen" component={ImagePickerScreen} />
             <Stack.Screen name="Match" component={MatchScreen2} />
             <Stack.Screen name="Tab" component={TabScreen} />
             <Stack.Screen name="UserList" component={UserList} />

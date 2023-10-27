@@ -180,8 +180,8 @@ export default function MatchScreen2({ navigation, route }) {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#000' }}>
-      <Text style={{ color: '#fff', fontSize: 24, marginTop: 60, alignSelf: 'center', fontFamily: 'GothamRounded-Light' }}>now find your</Text>
-      <Text style={{ color: '#fff', fontSize: 80, marginTop: 10, alignSelf: 'center', fontFamily: 'GothamRounded-Medium' }}>qrush</Text>
+      {/* <Text style={{ color: '#fff', fontSize: 24, marginTop: 60, alignSelf: 'center', fontFamily: 'GothamRounded-Light' }}>now find your</Text>
+      <Text style={{ color: '#fff', fontSize: 80, marginTop: 10, alignSelf: 'center', fontFamily: 'GothamRounded-Medium' }}>qrush</Text> */}
       <View>
         <ModalComponent visible={modalVisible} onClose={closeModal} receiverName={receiverName} senderName={senderName}/>
       </View>
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: 'white',
-    height: '80%',
+    height: '60%',
     width: '100%',
     borderRadius: 8,
     shadowColor: '#000',

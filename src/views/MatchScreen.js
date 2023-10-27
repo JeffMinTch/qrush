@@ -118,7 +118,7 @@ export default function MatchScreen({ navigation, route }) {
             (card) => (
               <View key={card.uuid} style={[{ backgroundColor: 'white', height: '80%', width: '100%', borderRadius: 8 }, styles.cardShadow]}>
 
-                <Image source={{ uri: apiBaseUrl + '/event/image/' + card.uuid }} resizeMode="cover" style={styles.cardImage} />
+                <Image source={{ uri: apiBaseUrl + '/event/image/' + card.uuid }} resizeMode="contain" style={styles.cardImage} />
               </View>
             )
           }
