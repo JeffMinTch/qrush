@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons'; // Icon-Bibliothek hinzugefügt
 import MatchScreen from './MatchScreen2';
 import { MaterialIcons } from '@expo/vector-icons';
 
-
+//test
 const Tab = createBottomTabNavigator();
 
 export default function TabScreen2({ route }) {
